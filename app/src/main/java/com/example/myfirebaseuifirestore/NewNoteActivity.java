@@ -31,7 +31,7 @@ public class NewNoteActivity extends AppCompatActivity {
         numberPickerPriority = findViewById(R.id.number_picker_priority);
 
         numberPickerPriority.setMinValue(1);
-        numberPickerPriority.setMaxValue(10);
+        numberPickerPriority.setMaxValue(100);
     }
 
     @Override
@@ -58,9 +58,20 @@ public class NewNoteActivity extends AppCompatActivity {
         String description = editTextDescription.getText().toString().trim();
         int priority = numberPickerPriority.getValue();
 
-        if (title.isEmpty() || description.isEmpty())
+        if (title.isEmpty() && description.isEmpty())
         {
-            Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
+            editTextTitle.setError("Please enter title");
+            editTextDescription.setError("Please enter description");
+            return;
+        }
+        if (title.isEmpty())
+        {
+            editTextTitle.setError("Please enter title");
+            return;
+        }
+        if (description.isEmpty())
+        {
+            editTextDescription.setError("Please enter description");
             return;
         }
 
